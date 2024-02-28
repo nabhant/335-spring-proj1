@@ -5,7 +5,7 @@
     /* Constructor */
     Book::Book()
     {
-
+        
     }
 
     /* Destructor */
@@ -149,5 +149,16 @@
 
     void Book::print() const
     {
+        std::cout<<"Title: " << title_<<std::endl;
+        std::cout<<"Author: " << author_<<std::endl;
+        std::cout<<"ISBN: " << ISBN_<<std::endl;
+        std::cout<<"Price: " << price_<<std::endl;
+        for (auto it = keywords_.begin(); it!=keywords_.end(); ++it){
+            std::cout<<*it;
+            if (std::next(it)!= keywords_.end())
+                std::cout<<", ";
+        }
+        std::cout<<std::endl;
+        std::cout<<"Blurb: " << blurb_<<std::endl;
 
     }
