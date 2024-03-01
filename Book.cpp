@@ -24,12 +24,13 @@
     /* Copy Constructor */
 
     Book::Book(const Book& rhs){
-        this->title_ = rhs.title_;
-        this->author_ = rhs.author_;
-        this->ISBN_ = rhs.ISBN_;
-        this->price_ = rhs.price_;
-        this->keywords_ = rhs.keywords_;
-        this->blurb_= rhs.blurb_;
+        title_ = rhs.title_;
+        author_ = rhs.author_;
+        ISBN_ = rhs.ISBN_;
+        price_ = rhs.price_;
+        keywords_ = rhs.keywords_;
+        blurb_= rhs.blurb_;
+        icon_ = new int[80];
         for (int i = 0; i < 80; ++i)
         {
         icon_[i] = rhs.icon_[i]; 
@@ -48,16 +49,18 @@
             delete[] icon_;
             icon_ = nullptr;
         }
-        this->title_ = rhs.title_;
-        this->author_ = rhs.author_;
-        this->ISBN_ = rhs.ISBN_;
-        this->price_ = rhs.price_;
-        this->keywords_ = rhs.keywords_;
-        this->blurb_= rhs.blurb_;
+        title_ = rhs.title_;
+        author_ = rhs.author_;
+        ISBN_ = rhs.ISBN_;
+        price_ = rhs.price_;
+        keywords_ = rhs.keywords_;
+        blurb_= rhs.blurb_;
+        icon_ = new int[80];
         for (int i = 0; i < 80; ++i)
         {
         icon_[i] = rhs.icon_[i]; 
         }
+        
         return *this;
     }
 
