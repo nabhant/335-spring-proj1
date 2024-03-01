@@ -5,7 +5,13 @@
     /* Constructor */
     Book::Book()
     {
-        
+        title_ = "";
+        author_ = "";
+        ISBN_ = 0;
+        icon_ = nullptr;
+        price_ = 0.0;
+        keywords_ = {};
+        blurb_ = "";
     }
 
     /* Destructor */
@@ -24,7 +30,10 @@
         this->price_ = rhs.price_;
         this->keywords_ = rhs.keywords_;
         this->blurb_= rhs.blurb_;
-        std::copy(rhs.icon_, rhs.icon_ + 80, icon_);
+        for (int i = 0; i < 80; ++i)
+        {
+        icon_[i] = rhs.icon_[i]; 
+        }
     }
     
 
@@ -45,8 +54,10 @@
         this->price_ = rhs.price_;
         this->keywords_ = rhs.keywords_;
         this->blurb_= rhs.blurb_;
-        std::copy(rhs.icon_, rhs.icon_ + 80, icon_);
-
+        for (int i = 0; i < 80; ++i)
+        {
+        icon_[i] = rhs.icon_[i]; 
+        }
         return *this;
     }
 
@@ -67,13 +78,24 @@
     /* Move Assignment Operator */
 
 
-    // MUTATORS AND ACCESSORS 
-
     Book& Book::operator=(Book&& rhs)
     {
-
+        if (this != &rhs)
+        {
+            title_ = std::move(rhs.title_);
+            author_ = std::move(rhs.author_);
+            ISBN_ = std::move(rhs.ISBN_);
+            price_ = std::move(rhs.price_);
+            keywords_ = std::move(rhs.keywords_);
+            blurb_ = std::move(rhs.blurb_);
+            delete[] icon_;               
+            icon_ = std::move(rhs.icon_);  
+            rhs.icon_ = nullptr; 
+        }
+        return *this;
     }
 
+ // MUTATORS AND ACCESSORS 
     const std::string& Book::getTitle() const
     {
         return title_;
@@ -152,7 +174,17 @@
         std::cout<<"Title: " << title_<<std::endl;
         std::cout<<"Author: " << author_<<std::endl;
         std::cout<<"ISBN: " << ISBN_<<std::endl;
-        std::cout<<"Price: " << price_<<std::endl;
+        std::cout<<"Icon: ";
+        if (icon_ != NULL)
+        {
+            for (int i = 0; i < 80; i++)
+            {
+                std::cout<<icon_[i]<< " ";
+            }
+            std::cout<<std::endl;
+        }
+        std::cout<<std::fixed<<std::setprecision(2)<<"Price: $" << price_<<std::endl;
+
         for (auto it = keywords_.begin(); it!=keywords_.end(); ++it){
             std::cout<<*it;
             if (std::next(it)!= keywords_.end())

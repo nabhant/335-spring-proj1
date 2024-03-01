@@ -11,7 +11,31 @@ void moveAll (const std::string keyword, std::vector<Book> &source, std::vector<
   int books_moved=0; // counts books moved
   // DO NOT ALTER ABOVE HERE
 
-  // erase this comment and write your code here
+   for (auto it = source.begin(); it != source.end();) 
+   {
+    bool found = false; // Use this to track if the keyword is found
+      for (const auto& kw : it->getKeywords()) 
+      {
+        if (kw == keyword) 
+        {
+          found = true;
+          break; // Exit the loop early if the keyword is found
+        }
+
+      }
+
+      if (found) 
+      {
+        dest.push_back(std::move(*it)); // Move the book to dest
+        it = source.erase(it); // Erase returns the next iterator, so no need to increment
+        books_moved++;
+      } 
+      
+      else 
+      {
+        ++it; // Only increment if we didn't erase (move) the book
+      }
+    }
 
 
   // DO NOT ALTER BELOW HERE
