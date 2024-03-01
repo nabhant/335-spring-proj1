@@ -11,30 +11,25 @@ void moveAll (const std::string keyword, std::vector<Book> &source, std::vector<
   int books_moved=0; // counts books moved
   // DO NOT ALTER ABOVE HERE
 
-   for (auto it = source.begin(); it != source.end();) 
-   {
-    bool found = false; // Use this to track if the keyword is found
-      for (const auto& kw : it->getKeywords()) 
-      {
-        if (kw == keyword) 
-        {
-          found = true;
-          break; // Exit the loop early if the keyword is found
+  for (auto it = source.begin(); it != source.end(); ) {
+        bool found = false;
+        for (auto kw_it = it->getKeywords().begin(); kw_it != it->getKeywords().end(); ++kw_it) {
+            if (keyword == *kw_it) {
+                found = true;
+                break; // Found the keyword, no need to check further
+            }
         }
 
-      }
-
-      if (found) 
-      {
-        dest.push_back(std::move(*it)); // Move the book to dest
-        it = source.erase(it); // Erase returns the next iterator, so no need to increment
-        books_moved++;
-      } 
-
-      else 
-      {
-        ++it; // Only increment if we didn't erase (move) the book
-      }
+        if (found) {
+            dest.push_back(std::move(*it)); // Move the book to dest
+            it = source.erase(it); // Correctly update the iterator after erase
+            ++books_moved;
+        } else {
+            ++it; // Only increment if we didn't erase
+        }
     }
 
-
+  // DO NOT ALTER BELOW HERE
+  const auto t1_end = std::chrono::steady_clock::now();
+  int t1 = std::chrono::duration <double, std::micro> (t1_end - t1_start).count();
+  std::cout << "Moved " << books_moved << " books in " << t1 << " microseconds." << std::endl;
