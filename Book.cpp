@@ -187,7 +187,7 @@
             std::cout<<std::endl;
         }
         std::cout<<std::fixed<<std::setprecision(2)<<"Price: $" << price_<<std::endl;
-
+        std::cout<<"Keywords: ";
         for (auto it = keywords_.begin(); it!=keywords_.end(); ++it){
             std::cout<<*it;
             if (std::next(it)!= keywords_.end())
