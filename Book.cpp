@@ -60,7 +60,7 @@
         {
         icon_[i] = rhs.icon_[i]; 
         }
-        
+
         return *this;
     }
 
@@ -190,7 +190,7 @@
 
         for (auto it = keywords_.begin(); it!=keywords_.end(); ++it){
             std::cout<<*it;
-            if (std::next(it)!= keywords_.end())
+            if (std::next(it)!= keywords_.end() - 1 )
                 std::cout<<", ";
         }
         std::cout<<std::endl;
